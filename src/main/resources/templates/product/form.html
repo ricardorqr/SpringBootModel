@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot Model</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-body">
+				<form method="POST" action="/product/addProduct">
+					<div class="form-group">
+						<label for="title">Title</label>
+						<input id="title" class="form-control" type="text" name="title" />
+					</div>
+					<div class="form-group">
+						<label for="decription">Description</label>
+						<textarea id="description" class="form-control" rows="10" cols="20" name="description"></textarea>
+					</div>
+					<div class="form-group">
+						<label id="pages">Pages</label>
+						<input id="pages" class="form-control" type="text" name="pages" />
+					</div>
+					<div class="form-group" th:each="type, status : ${types}">
+			            <label th:for="price + ${status.index}" th:text="${type}"></label>
+			            <input th:id="price + ${status.index}" class="form-control" type="text" th:name="prices[__${status.index}__].value" />
+			            <input class="form-control" type="hidden" th:name="prices[__${status.index}__].priceType" th:value="${type}" />
+			        </div>
+
+					<input type="submit" class="btn btn-primary" value="Upload" />
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
+	<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+</body>
+</html>

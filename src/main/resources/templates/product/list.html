@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Lista de Contas</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-header"><h1>Production List</h1></div>
+			<div class="card-body">
+				<table class="table table-sm table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th>ID</th>
+							<th>Title</th>
+							<th>Description</th>
+							<th>Pages</th>
+						</tr>
+					</thead>
+					<tr th:each="product : ${products}">
+						<td><span th:text="${product.id}"></span></td>
+						<td><span th:text="${product.title}"></span></td>
+						<td><span th:text="${product.description}"></span></td>
+						<td><span th:text="${product.pages}"></span></td>
+					</tr>
+				</table>
+				<a href="/" class="btn btn_lg btn-primary">Try it again</a>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
+	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+</body>
+</html>
