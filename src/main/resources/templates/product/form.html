@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:form="http://www.springframework.org/tags/form" 
+	xmlns:s="http://www.springframework.org/tags">
 <head>
 <title>Spring Boot Model</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -8,19 +10,23 @@
 <body>
 	<div class="container">
 		<div class="card">
+			<div class="card-header"><h1>New Production</h1></div>
 			<div class="card-body">
-				<form method="POST" action="/product/addProduct">
+				<form method="POST" th:action="@{/product/addProduct}" th:object="${product}">
 					<div class="form-group">
 						<label for="title">Title</label>
-						<input id="title" class="form-control" type="text" name="title" />
+						<input id="title" class="form-control" type="text" th:field="*{title}" />
+						<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span>
 					</div>
 					<div class="form-group">
 						<label for="decription">Description</label>
-						<textarea id="description" class="form-control" rows="10" cols="20" name="description"></textarea>
+						<textarea id="description" class="form-control" rows="4" cols="20" th:field="*{description}" ></textarea>
+						<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</span>
 					</div>
 					<div class="form-group">
 						<label id="pages">Pages</label>
-						<input id="pages" class="form-control" type="text" name="pages" />
+						<input id="pages" class="form-control" type="text" th:field="*{pages}" />
+						<span th:if="${#fields.hasErrors('pages')}" th:errors="*{pages}">Pages Error</span>
 					</div>
 					<div class="form-group" th:each="type, status : ${types}">
 			            <label th:for="price + ${status.index}" th:text="${type}"></label>
@@ -29,6 +35,7 @@
 			        </div>
 
 					<input type="submit" class="btn btn-primary" value="Upload" />
+					<a href="/product/list" class="btn btn_lg btn-primary">Show all products</a>
 				</form>
 			</div>
 		</div>
