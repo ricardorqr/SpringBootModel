@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +23,7 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(new ProductValidation());
@@ -43,7 +44,8 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/product/addProduct", method = RequestMethod.POST)
-	public ModelAndView addProduct(@Valid Product product, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	public ModelAndView addProduct(@Valid Product product, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return form(product);
 		}
@@ -52,6 +54,14 @@ public class ProductController {
 		redirectAttributes.addFlashAttribute("success", "New product inserted");
 		ModelAndView modelAndView = new ModelAndView("redirect:list");
 		return modelAndView;
+	}
+	
+	@RequestMapping("/product/detail/{id}")
+	public ModelAndView detalhe(@PathVariable("id") Long id){
+	    ModelAndView modelAndView = new ModelAndView("/product/detail");
+	    Product product = productService.getProduct(id);
+	    modelAndView.addObject("product", product);
+	    return modelAndView;
 	}
 
 }

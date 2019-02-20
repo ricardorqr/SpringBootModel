@@ -19,13 +19,15 @@
 							<th>ID</th>
 							<th>Title</th>
 							<th>Description</th>
+							<th>Release Date</th>
 							<th>Pages</th>
 						</tr>
 					</thead>
 					<tr th:each="product : ${products}">
 						<td><span th:text="${product.id}"></span></td>
-						<td><span th:text="${product.title}"></span></td>
+						<td><a href="#" th:href="@{/product/detail/} + ${product.id}" th:text="${product.title}"></a></td>
 						<td><span th:text="${product.description}"></span></td>
+						<td><span th:text="${product.releaseDate}"></span></td>
 						<td><span th:text="${product.pages}"></span></td>
 					</tr>
 				</table>
