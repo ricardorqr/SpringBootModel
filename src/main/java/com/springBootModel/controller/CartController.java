@@ -12,19 +12,19 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springBootModel.model.Cart;
-import com.springBootModel.model.CartProduct;
+import com.springBootModel.model.CartItem;
 import com.springBootModel.model.PriceType;
 import com.springBootModel.model.Product;
 import com.springBootModel.service.ProductService;
 import com.springBootModel.validation.ProductValidation;
 
 @Controller
-@Scope(value=WebApplicationContext.SCOPE_REQUEST)
+@Scope(value = WebApplicationContext.SCOPE_REQUEST)
 public class CartController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	@Autowired
 	private Cart cart;
 
@@ -35,16 +35,22 @@ public class CartController {
 
 	@RequestMapping("/cart/add")
 	public ModelAndView add(Long productId, PriceType priceType, HttpSession session) {
-		CartProduct cartProduct = createCartProduct(productId, priceType);
+		CartItem cartProduct = createItem(productId, priceType);
 		cart.add(cartProduct);
 		session.setAttribute("cart", cart);
-		ModelAndView modelAndView = new ModelAndView("redirect:/product/list");
+		ModelAndView modelAndView = new ModelAndView("redirect:/cart");
+		modelAndView.addObject("cart", cart);
 		return modelAndView;
 	}
 
-	private CartProduct createCartProduct(Long produtoId, PriceType priceType) {
+	private CartItem createItem(Long produtoId, PriceType priceType) {
 		Product product = productService.getProduct(produtoId);
-		return new CartProduct(product, priceType);
+		return new CartItem(product, priceType);
+	}
+
+	@RequestMapping("/cart")
+	public ModelAndView itens() {
+		return new ModelAndView("cart/items");
 	}
 
 }

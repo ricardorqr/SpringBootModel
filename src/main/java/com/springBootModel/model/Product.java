@@ -1,5 +1,6 @@
 package com.springBootModel.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,6 +34,10 @@ public class Product {
 	@ElementCollection
 	@NotNull
 	private List<Price> prices;
+	
+	public BigDecimal priceFor(PriceType priceType) {
+	    return prices.stream().filter(price -> price.getPriceType().equals(priceType)).findFirst().get().getValue();
+	}
 
 	public String getTitle() {
 		return title;

@@ -1,29 +1,23 @@
 package com.springBootModel.model;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.math.BigDecimal;
 
-
-public class CartProduct {
+public class CartItem {
 
 	private PriceType priceType;
 	private Product product;
-	private Map<CartProduct, Integer> cart = new LinkedHashMap<CartProduct, Integer>();
 
-	public CartProduct(Product product, PriceType priceType) {
+	public CartItem(Product product, PriceType priceType) {
 		this.product = product;
 		this.priceType = priceType;
 	}
 
-	public void add(CartProduct product) {
-		cart.put(product, getTotal(product) + 1);
+	public BigDecimal getPrice() {
+		return product.priceFor(priceType);
 	}
 
-	private int getTotal(CartProduct product) {
-		if (!cart.containsKey(product)) {
-			cart.put(product, 0);
-		}
-		return cart.get(product);
+	public BigDecimal getTotal(int quantity) {
+		return this.getPrice().multiply(new BigDecimal(quantity));
 	}
 
 	public PriceType getPriceType() {
@@ -59,7 +53,7 @@ public class CartProduct {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CartProduct other = (CartProduct) obj;
+		CartItem other = (CartItem) obj;
 		if (priceType != other.priceType)
 			return false;
 		if (product == null) {
