@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.springBootModel.model.Cart;
 import com.springBootModel.model.CartItem;
 import com.springBootModel.model.PriceType;
 import com.springBootModel.model.Product;
+import com.springBootModel.service.Cart;
 import com.springBootModel.service.ProductService;
 import com.springBootModel.validation.ProductValidation;
 
@@ -38,9 +38,7 @@ public class CartController {
 		CartItem cartProduct = createItem(productId, priceType);
 		cart.add(cartProduct);
 		session.setAttribute("cart", cart);
-		ModelAndView modelAndView = new ModelAndView("redirect:/cart");
-		modelAndView.addObject("cart", cart);
-		return modelAndView;
+		return new ModelAndView("redirect:/cart");
 	}
 
 	private CartItem createItem(Long produtoId, PriceType priceType) {
@@ -49,8 +47,14 @@ public class CartController {
 	}
 
 	@RequestMapping("/cart")
-	public ModelAndView itens() {
+	public ModelAndView itens(HttpSession session) {
 		return new ModelAndView("cart/items");
+	}
+
+	@RequestMapping("/cart/remove")
+	public ModelAndView remover(Long productId, PriceType priceType) {
+		cart.remover(productId, priceType);
+		return new ModelAndView("redirect:/cart");
 	}
 
 }

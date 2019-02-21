@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.springBootModel.model.Cart;
+import com.springBootModel.service.Cart;
 
 @SpringBootApplication
 //@ComponentScan(basePackageClasses = {Cart.class})
