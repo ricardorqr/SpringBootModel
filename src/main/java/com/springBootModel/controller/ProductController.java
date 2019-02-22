@@ -32,7 +32,7 @@ public class ProductController {
 
 	@RequestMapping("/product/form")
 	public ModelAndView form(Product product) {
-		ModelAndView modelAndView = new ModelAndView("/product/form");
+		ModelAndView modelAndView = new ModelAndView("product/form");
 		modelAndView.addObject("types", PriceType.values());
 		return modelAndView;
 	}
