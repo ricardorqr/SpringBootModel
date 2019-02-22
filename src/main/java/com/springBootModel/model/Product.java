@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,6 +25,7 @@ public class Product {
 	private String title;
 
 	@NotNull
+	@Size(max = 1000)
 	private String description;
 
 	@DateTimeFormat(pattern = "MM/dd/yyyy")

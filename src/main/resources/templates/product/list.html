@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<title>Spring Boot Model</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
+<th:block layout:decorator="baseModel" layout:fragment="content">
 	<div class="container">
 		<div class="card">
 			<div class="card-header">
@@ -31,12 +24,7 @@
 						<td><span th:text="${product.pages}"></span></td>
 					</tr>
 				</table>
-				<a href="/product/form" class="btn btn_lg btn-primary">Insert new product</a>
 			</div>
 		</div>
 	</div>
-
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
-	<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-</body>
-</html>
+</th:block>

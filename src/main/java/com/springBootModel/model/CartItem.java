@@ -64,4 +64,9 @@ public class CartItem {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "CartItem [priceType=" + priceType + ", product=" + product + "]";
+	}
+
 }

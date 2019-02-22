@@ -2,12 +2,10 @@ package com.springBootModel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-
-import com.springBootModel.service.Cart;
+import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
-//@ComponentScan(basePackageClasses = {Cart.class})
+@EnableCaching
 public class SpringBootModelApplication {
 
 	public static void main(String[] args) {
