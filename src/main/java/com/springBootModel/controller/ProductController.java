@@ -60,7 +60,7 @@ public class ProductController {
 	
 	@RequestMapping("/product/detail/{id}")
 	public ModelAndView detalhe(@PathVariable("id") Long id){
-	    ModelAndView modelAndView = new ModelAndView("/product/detail");
+	    ModelAndView modelAndView = new ModelAndView("product/detail");
 	    Product product = productService.getProduct(id);
 	    modelAndView.addObject("product", product);
 	    return modelAndView;
