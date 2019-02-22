@@ -25,7 +25,7 @@
 					</div>
 				</li>
 				<li class="list-group-item">
-					<form action="/cart/add" method="post">
+					<form th:action="@{/cart/add}" method="post">
 						<input type="hidden" name="productId" th:value="${product.id}" />
 						
 						<div class="row">

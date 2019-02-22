@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,7 +34,7 @@ public class CartController {
 		binder.addValidators(new ProductValidation());
 	}
 
-	@RequestMapping("/cart/add")
+	@RequestMapping(value = "/cart/add", method = RequestMethod.POST)
 	public ModelAndView add(Long productId, PriceType priceType, HttpSession session) {
 		CartItem cartProduct = createItem(productId, priceType);
 		cart.add(cartProduct);
@@ -51,7 +52,7 @@ public class CartController {
 		return new ModelAndView("cart/items");
 	}
 
-	@RequestMapping("/cart/remove")
+	@RequestMapping(value = "/cart/remove", method = RequestMethod.POST)
 	public ModelAndView remover(Long productId, PriceType priceType) {
 		cart.remover(productId, priceType);
 		return new ModelAndView("redirect:/cart");
