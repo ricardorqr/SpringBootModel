@@ -1,0 +1,48 @@
+<th:block layout:decorator="baseModel" layout:fragment="content">
+<div class="container">
+	<div class="card">
+		<div class="card-header"><h1>Details</h1></div>
+		<div class="card-body">
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					<div class="card mb-3" style="max-width: 540px;">
+					<div class="row no-gutters">
+						<div class="col-md-4">
+							<img class="card-img"
+								src="../../imagens/java8.png" />
+						</div>
+						<div class="col-md-8">
+							<div class="card-body">
+								<h5 class="card-title" th:text="${product.title}"></h5>
+								<p class="card-text" th:text="${product.description}"></p>
+								<p class="card-text">Pages: <span th:text="${product.pages}"></span></p>
+								<p class="card-text">Release Date: <span th:text="${product.releaseDate}"></span></p>
+								<p class="card-text">
+									<small class="text-muted">Last updated 3 mins ago</small>
+								</p>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<form th:action="@{/cart/add}" method="post">
+						<input type="hidden" name="productId" th:value="${product.id}" />
+						
+						<div class="row">
+							<div class="col" th:each="price : ${product.prices}">
+								<input type="radio" name="priceType" th:id="${price.priceType}" 
+									th:value="${price.priceType}" checked="checked" />
+								<label th:for="${price.priceType}"><span th:text="${price.priceType}"></span></label>
+								<p th:text="${price.value}"></p>
+							</div>
+							<div class="col" >
+								<input type="submit" class="btn btn-primary" value="Buy" />
+							</div>
+						</div>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+</th:block>

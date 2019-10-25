@@ -1,0 +1,64 @@
+<th:block layout:decorator="baseModel" layout:fragment="content">
+	<div class="container">
+		<div class="card">
+			<div class="card-header">
+				<h1>Shopping Cart</h1>
+				<span th:text="${success}"></span>
+			</div>
+			<div class="card-body">
+				<table id="cart-table" class="table table-sm table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th></th>
+							<th width="65%">Item</th>
+							<th width="10%">Price</th>
+							<th width="10%">Quantity</th>
+							<th width="10%">Total</th>
+							<th width="5%"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="item : ${session.cart?.items}">
+							<td>
+								<img width="71px" height="100px" 
+									src="../imagens/java8.png" />
+							</td>
+							<td><span th:text="${item.product?.title}"></span></td>
+							<td><span th:text="${item.price}"></span></td>
+							<td>
+								<input type="number" min="0" name="quantity" th:value="${session.cart.getQuantity(item)}" />
+							</td>
+							<td><span th:text="${session.cart.getTotal(item)}"></span></td>
+							<td>
+								<form th:action="@{/cart/remove}" method="post">
+									<input type="hidden" name="productId" th:value="${item.product.id}" />
+									<input type="hidden" name="priceType" th:value="${item.priceType}" />
+							        <input type="image" src="../imagens/excluir.png" alt="Excluir" title="Excluir" />
+							    </form>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="3">
+								<div class="btn-toolbar" role="toolbar">
+									<div class="btn-group mr-2" role="group" aria-label="First group">
+										<form th:action="@{/pay}" method="post">
+										    <input type="submit" class="btn btn-primary" name="checkout" value="Pay" />
+										</form>
+									</div>
+									<div class="btn-group mr-2" role="group" aria-label="First group">
+										<a class="btn btn-primary" href="#" th:href="@{/}">Add new item</a>
+									</div>
+								</div>
+							</td>
+							<td><span th:text="${session.cart?.total}"></span></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</th:block>

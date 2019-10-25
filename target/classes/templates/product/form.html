@@ -1,0 +1,38 @@
+<th:block layout:decorator="baseModel" layout:fragment="content">
+	<div class="container">
+		<div class="card">
+			<div class="card-header"><h1>New Product</h1></div>
+			<div class="card-body">
+				<form class="needs-validation" method="POST" th:action="@{/product/addProduct}" th:object="${product}">
+					<div class="form-group">
+						<label for="title">Title</label>
+						<input id="title" class="form-control" type="text" th:field="*{title}" />
+						<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</div>
+					</div>
+					<div class="form-group">
+						<label for="decription">Description</label>
+						<textarea id="description" class="form-control" rows="4" cols="20" th:field="*{description}" ></textarea>
+						<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</span>
+					</div>
+					<div class="form-group">
+						<label id="pages">Pages</label>
+						<input id="pages" class="form-control" type="text" th:field="*{pages}" />
+						<span th:if="${#fields.hasErrors('pages')}" th:errors="*{pages}">Pages Error</span>
+					</div>
+					<div class="form-group">
+						<label id="releaseDate">Release Date</label>
+						<input id="releaseDate" class="form-control" type="text" th:field="*{releaseDate}" />
+						<span th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}">Release Data Error</span>
+					</div>
+					<div class="form-group" th:each="type, status : ${types}">
+			            <label th:for="price + ${status.index}" th:text="${type}"></label>
+			            <input th:id="price + ${status.index}" class="form-control" type="text" th:name="prices[__${status.index}__].value" />
+			            <input class="form-control" type="hidden" th:name="prices[__${status.index}__].priceType" th:value="${type}" />
+			        </div>
+
+					<input type="submit" class="btn btn-primary" value="Upload" />
+				</form>
+			</div>
+		</div>
+	</div>
+</th:block>

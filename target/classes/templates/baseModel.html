@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:s="http://www.springframework.org/tags"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<th:block th:replace="layout/head"></th:block>
+</head>
+<body>
+	<th:block th:replace="layout/nav"></th:block>
+
+	<!-- Page Content -->
+	<div layout:fragment="content" >
+		<div class="container">
+			<div class="card">
+				<div class="card-header">
+					<h1>Products</h1>
+					<span th:text="${success}"></span>
+				</div>
+				<div class="card-body">
+					<div class="card-group">
+						<div class="card" th:each="product : ${products}">
+							<a href="#" th:href="@{/product/detail/} + ${product.id}">
+								<img width="143"
+									height="202"
+									src="../imagens/java8.png"
+									th:alt="${product.title}"
+									th:title="${product.title}" />
+								<h2 th:text="${product.title}"></h2>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.container -->
+
+	<th:block th:replace="layout/footer"></th:block>
+</body>
+</html>
+
